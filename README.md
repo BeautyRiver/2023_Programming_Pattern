@@ -1,2 +1,4 @@
-# 2023_Programming_Pattern
-2023년 2학년 1학기 프로그래밍 패턴 수업용 -김민강
+# 유한대학교 VR게임앱학과 Programming Pattern
+* 학번:202227042
+* 이름:김민강
+
