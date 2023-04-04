@@ -5,110 +5,62 @@
 
 void print_title_screen();
 void print_introduction_screen();
+void print_game_screen();
 
-void gotoxy(int x, int y)
-{
-	//x,y 좌표 설정	
+void gotoxy(int x, int y) {
+	//x, y 좌표 설정
+	COORD pos = { x,y };
 
+	//커서 이동
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
 }
+
+char ch;
+int is_game_run = 1;		//게임 구동여부
+int is_game_starting = 0;	//게임 시작여부
+int is_introducing = 0;		//게임 설명여부
+int game_state = 0;
 
 int main()
 {
-	char ch;
-	int game_state = 0;
-	int is_game_running = 1;
-	//교수님 코드    
-	//while (is_game_running)
-	//{
-	//    char key_input = '0';
-	//    switch (game_state)
-	//    {
-	//    case 0:
-	//        //메인화면 출력 함수 호출
-	//        print_title_screen();
-	//        key_input = _getch();
-	//        switch (key_input)
-	//        {
-	//        case '1':
-	//            break;
-	//        case '2':
-	//            game_state = 2;
-	//            break;
-	//        case '3':
-	//            break;
-	//        case '4':
-	//            is_game_running = 0;
-	//			  std::cout << "게임을 종료합니다..." << std::endl;
-	//            break;
-	//        case 27:
-	//            is_game_running = 0;
-	//        default:
-	//            break;
-	//        }
-	//        break;
-
-	//    case 2:
-	//        print_introduction_screen();
-	//        key_input = _getch();
-	//        switch (key_input)
-	//        {
-	//        case 'y':
-	//        case 'Y':
-	//            game_state = 0;
-	//            break;
-	//        case 'n':
-	//        case 'N':
-	//            std::cout << "타이틀 화면으로 돌아가지 않았습니다.\n" << std::endl;
-
-	//            break;
-	//        default:
-	//            break;
-	//        }
-	//        break;
-	//    default:
-	//        std::cout << "(Y/N)중에서 선택해주세요.\n" << std::endl;
-	//        break;
-	//    }
-	//}
-	//내 코드
-
-	while (1)
+	while (is_game_run)
 	{
+		//타이틀화면 출력
 		print_title_screen();
+
 		ch = _getch();
-		//2(게임설명) 입력시
-		if (ch == '2')
+		if (ch == '1')
+			is_game_starting = 1;
+
+		else if (ch == '2')
+			is_introducing = 1;
+
+		else if (ch == '3')
 		{
-			while (1)
-			{
-				//키 입력을 받아 설명화면을 계속 유지할지 / 타이틀 화면으로 이동할지 결정
-				print_introduction_screen();
-				ch = _getch();
-				if (ch == 'Y' || ch == 'y')
-				{
-					break;
-				}
-				else if (ch == 'N' || ch == 'n')
-				{
-					std::cout << "타이틀 화면으로 돌아가지 않았습니다.\n" << std::endl;
-					continue;
-				}
-				else
-				{
-					std::cout << "(Y/N)중에서 선택해주세요.\n" << std::endl;
-				}
-			}
+
 		}
-		//ESC (ASCII- 27) || 4 입력시 반복문 종료
-		else if (ch == 27 || ch == '4')
+		else if (ch == 27 || ch == '4') //ESC (ASCII- 27)		
+			is_game_run = 0;
+
+
+		//1.(게임시작)입력시
+		while (is_game_starting)
 		{
-			std::cout << "게임을 종료합니다..." << std::endl;
-			break;
+			print_game_screen();
+		}
+
+		//2.(게임설명)입력시		
+		while (is_introducing)
+		{
+			//키 입력을 받아 설명화면을 계속 유지할지 / 타이틀 화면으로 이동할지 결정하는 함수 호출
+			print_introduction_screen();
 		}
 	}
+	std::cout << "게임을 종료합니다..." << std::endl;
 	return 0;
 }
 
+//함수들
 //메인화면 출력 함수 / game_state == 0
 void print_title_screen()
 {
@@ -133,7 +85,57 @@ void print_title_screen()
 	std::cout << "*                                          *" << std::endl;
 	std::cout << "*                                          *" << std::endl;
 	std::cout << "********************************************" << std::endl;
+
+
 }
+
+//게임시작 출력함수 
+void print_game_screen() {
+	system("cls");	//화면지우기
+	int input_x = 0, input_y = 0;	
+	int map[100][100] = {0};
+	std::cout << "x의 길이를 입력해주세요 >> ";
+	std::cin >> input_x;
+	std::cout << "y의 길이를 입력해주세요 >> ";
+	std::cin >> input_y;
+	system("cls");
+	
+	for (int y = 0; y < input_y; y++)
+	{
+		for (int x = 0; x < input_x; x++)
+		{
+			
+		}
+	}
+	for (int i = 0; i < input_x; i++)
+	{
+		std::cout << "*";
+	}
+	int x;
+	int y = 1;
+
+	while (y < input_y - 1)
+	{
+		x = 0;
+		gotoxy(x, y);
+		std::cout << "*";
+		x = input_x-1;
+		gotoxy(x, y);
+		std::cout << "*";
+		y++;		
+	}
+
+	gotoxy(0, y);
+
+	for (int i = 0; i < input_x; i++)
+	{
+		std::cout << "*";
+	}
+
+	std::cout << "\n";
+	system("pause");
+}
+
 //게임설명 출력 함수 / game_state == 2
 void print_introduction_screen()
 {
@@ -155,4 +157,20 @@ void print_introduction_screen()
 	std::cout << "*  타이틀 화면으로 돌아갈까요? (Y/N)       *" << std::endl;
 	std::cout << "*                                          *" << std::endl;
 	std::cout << "********************************************" << std::endl;
+
+	ch = _getch();
+	if (ch == 'Y' || ch == 'y')
+	{
+		std::cout << "타이틀 화면으로 돌아갑니다." << std::endl;
+		is_introducing = 0;
+	}
+	else if (ch == 'N' || ch == 'n')
+	{
+		std::cout << "타이틀 화면으로 돌아가지 않았습니다.\n" << std::endl;
+		is_introducing = 1;
+	}
+	else
+	{
+		std::cout << "(Y/N)중에서 선택해주세요.\n" << std::endl;
+	}
 }
