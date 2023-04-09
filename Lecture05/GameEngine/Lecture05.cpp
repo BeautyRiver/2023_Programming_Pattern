@@ -2,6 +2,7 @@
 #include <iostream>
 #include <conio.h>
 #include <Windows.h>
+int map[100][100] = { 0 };
 
 void print_title_screen();
 void print_introduction_screen();
@@ -92,22 +93,48 @@ void print_title_screen()
 //게임시작 출력함수 
 void print_game_screen() {
 	system("cls");	//화면지우기
-	int input_x = 0, input_y = 0;	
-	int map[100][100] = {0};
+	int input_x = 0, input_y = 0;
+	
 	std::cout << "x의 길이를 입력해주세요 >> ";
 	std::cin >> input_x;
 	std::cout << "y의 길이를 입력해주세요 >> ";
 	std::cin >> input_y;
-	system("cls");
-	
+	system("cls"); 	
+
+	//MAP에 사용자가 입력한 길이만큼 MAP저장
 	for (int y = 0; y < input_y; y++)
 	{
 		for (int x = 0; x < input_x; x++)
 		{
-			
+			if (x == 0 || x == input_x - 1 || y == 0 || y == input_y - 1)
+			{
+				map[y][x] = 1;
+			}
+			else
+				map[y][x] = 0;
 		}
+	}	
+
+	//MAP 그리기(출력)
+	for (int draw_y = 0; draw_y < input_y; draw_y++)
+	{
+		for (int draw_x = 0; draw_x < input_x; draw_x++)
+		{
+			if (map[draw_y][draw_x] == 1)
+			{
+				std::cout << "*";
+			}
+			else if (map[draw_y][draw_x] == 0)
+			{
+				std::cout << " ";
+			}
+		}
+		std::cout << "\n";
 	}
-	for (int i = 0; i < input_x; i++)
+
+	system("pause");
+
+	/*for (int i = 0; i < input_x; i++)
 	{
 		std::cout << "*";
 	}
@@ -119,10 +146,10 @@ void print_game_screen() {
 		x = 0;
 		gotoxy(x, y);
 		std::cout << "*";
-		x = input_x-1;
+		x = input_x - 1;
 		gotoxy(x, y);
 		std::cout << "*";
-		y++;		
+		y++;
 	}
 
 	gotoxy(0, y);
@@ -133,7 +160,7 @@ void print_game_screen() {
 	}
 
 	std::cout << "\n";
-	system("pause");
+	system("pause");*/
 }
 
 //게임설명 출력 함수 / game_state == 2
