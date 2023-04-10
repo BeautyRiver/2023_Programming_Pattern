@@ -108,6 +108,10 @@ void print_game_screen() {
 		break;
 	}
 
+	//안쪽 길이로 설정하기
+	input_x += 2;
+	input_y += 2;
+
 	//MAP에 사용자가 입력한 길이만큼 MAP저장
 	for (int y = 0; y < input_y; y++)
 	{
@@ -131,6 +135,7 @@ void print_game_screen() {
 			{
 				std::cout << "*";
 			}
+
 			else if (map[draw_y][draw_x] == 0)
 			{
 				std::cout << " ";
