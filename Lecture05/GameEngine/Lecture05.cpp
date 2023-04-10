@@ -20,7 +20,6 @@ char ch;
 int is_game_run = 1;		//게임 구동여부
 int is_game_starting = 0;	//게임 시작여부
 int is_introducing = 0;		//게임 설명여부
-int game_state = 0;
 
 int main()
 {
@@ -94,12 +93,20 @@ void print_title_screen()
 void print_game_screen() {
 	system("cls");	//화면지우기
 	int input_x = 0, input_y = 0;
-	
-	std::cout << "x의 길이를 입력해주세요 >> ";
-	std::cin >> input_x;
-	std::cout << "y의 길이를 입력해주세요 >> ";
-	std::cin >> input_y;
-	system("cls"); 	
+	while (1)
+	{
+		std::cout << "x의 길이를 입력해주세요 최대(100) >> ";
+		std::cin >> input_x;
+		std::cout << "y의 길이를 입력해주세요 최대(100) >> ";
+		std::cin >> input_y;
+		system("cls");
+		if (input_x > 100 || input_y > 100)
+		{
+			std::cout << "X or Y의 길이를 100이하로 설정해주세요.\n" <<std::endl;
+			continue;
+		}
+		break;
+	}
 
 	//MAP에 사용자가 입력한 길이만큼 MAP저장
 	for (int y = 0; y < input_y; y++)
@@ -132,35 +139,7 @@ void print_game_screen() {
 		std::cout << "\n";
 	}
 
-	system("pause");
-
-	/*for (int i = 0; i < input_x; i++)
-	{
-		std::cout << "*";
-	}
-	int x;
-	int y = 1;
-
-	while (y < input_y - 1)
-	{
-		x = 0;
-		gotoxy(x, y);
-		std::cout << "*";
-		x = input_x - 1;
-		gotoxy(x, y);
-		std::cout << "*";
-		y++;
-	}
-
-	gotoxy(0, y);
-
-	for (int i = 0; i < input_x; i++)
-	{
-		std::cout << "*";
-	}
-
-	std::cout << "\n";
-	system("pause");*/
+	system("pause");	
 }
 
 //게임설명 출력 함수 / game_state == 2
