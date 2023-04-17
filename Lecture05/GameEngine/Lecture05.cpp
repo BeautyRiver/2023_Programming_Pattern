@@ -10,7 +10,7 @@ void print_game_screen();
 
 void gotoxy(int x, int y) {
 	//x, y 좌표 설정
-	COORD pos = { x,y };
+	COORD pos = { x-1,y-1 };
 
 	//커서 이동
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
@@ -143,8 +143,6 @@ void print_game_screen() {
 		}
 		std::cout << "\n";
 	}
-
-	system("pause");	
 }
 
 //게임설명 출력 함수 / game_state == 2
