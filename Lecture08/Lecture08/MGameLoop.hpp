@@ -106,59 +106,7 @@ namespace MuSoeun
 
 			case KEY_EXIT:
 			{
-				char decideExit;
-				bool isExitYes = false;
-				//24일 8주차 과제
-				system("cls");
-				std::cout << "정말 게임을 종료하시겠습니까?" << std::endl;
-				gotoxy(1, 10);
-				std::cout << "[예]" << std::endl;
-				gotoxy(10, 10);
-				std::cout << "[아니요]" << std::endl;
-
-				while (isGameRunning)
-				{
-					decideExit = _getch(); //a,d 입력					
-					switch (decideExit)
-					{
-					case KEY_LEFT: //a : 왼쪽
-						gotoxy(1, 10);
-						std::cout << ANSI_COLOR_YELLOW"[예]" << std::endl;	//활성화된 메뉴 노란색
-
-						gotoxy(10, 10);
-						std::cout << ANSI_COLOR_RESET"[아니요]" << std::endl;	//비활성화 메뉴 원래 색상
-
-						isExitYes = true;	
-
-						break;
-
-					case KEY_RIGHT: //d : 오른쪽
-						gotoxy(10, 10);
-						std::cout << ANSI_COLOR_YELLOW"[아니요]" << std::endl;	//활성화된 메뉴 노란색
-
-						gotoxy(1, 10);
-						std::cout << ANSI_COLOR_RESET"[예]" << std::endl;	//비활성화 메뉴 원래 색상
-						isExitYes = false;	
-
-						break;
-
-					case KEY_ENTER:	//엔터키를 입력했을때
-						if (isExitYes)	//isExitYes가 참일때 게임종료
-						{
-							system("cls");
-							isGameRunning = false;
-						}
-
-						else	//isExitYes가 거짓일때 message출력되면서 게임 계속 실행
-						{
-							std::cout << ANSI_COLOR_GREEN"\r[아니요]를 선택하였습니다.";
-						}
-
-						break;
-					default:
-						break;
-					}
-				}
+				AskForexit(); //Exit를 묻는 함수 실행
 			}
 				break;
 
@@ -169,6 +117,68 @@ namespace MuSoeun
 
 			default:
 				break;
+			}
+		}
+
+		void AskForexit()
+		{
+			char inputExitKey;			//a,d입력
+			bool isExitYes = false;		//[예] [아니요]의 실행여부 [예]:true [아니요]:false
+			bool isExitAsk = true; //게임종료 질문창 실행여부
+
+			//24일 8주차 과제
+			system("cls");
+			std::cout << "정말 게임을 종료하시겠습니까?" << std::endl;
+			gotoxy(1, 10);
+			std::cout << "[예]" << std::endl;
+			gotoxy(10, 10);
+			std::cout << "[아니요]" << std::endl;
+
+			while (isExitAsk)
+			{
+				inputExitKey = _getch(); //a,d 입력					
+				switch (inputExitKey)
+				{
+				case KEY_LEFT: //a : 왼쪽
+					gotoxy(1, 10);
+					std::cout << ANSI_COLOR_YELLOW"[예]" << std::endl;	//활성화된 메뉴 노란색
+
+					gotoxy(10, 10);
+					std::cout << ANSI_COLOR_RESET"[아니요]" << std::endl;	//비활성화 메뉴 원래 색상
+
+					isExitYes = true;
+
+					break;
+
+				case KEY_RIGHT: //d : 오른쪽
+					gotoxy(10, 10);
+					std::cout << ANSI_COLOR_YELLOW"[아니요]" << std::endl;	//활성화된 메뉴 노란색
+
+					gotoxy(1, 10);
+					std::cout << ANSI_COLOR_RESET"[예]" << std::endl;	//비활성화 메뉴 원래 색상
+					isExitYes = false;
+
+					break;
+
+				case KEY_ENTER:	//엔터키를 입력했을때
+					if (isExitYes)	//isExitYes가 참일때 게임종료
+					{
+						system("cls");
+						isExitAsk = false;
+						isGameRunning = false;
+					}
+
+					else	//isExitYes가 거짓일때 message출력되면서 게임 계속 실행
+					{
+						system("cls");
+						std::cout << ANSI_COLOR_GREEN"\r[아니요]를 선택하였습니다. 메뉴화면으로 돌아갑니다.";
+						isExitAsk = false;
+					}
+					break;
+
+				default:
+					break;
+				}
 			}
 		}
 	};
