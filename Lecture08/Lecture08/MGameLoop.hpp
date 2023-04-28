@@ -1,4 +1,4 @@
-#pragma once //#define _IS_THIS_HEADER_INCLUDED 
+Ôªø#pragma once //#define _IS_THIS_HEADER_INCLUDED 
 #define KEY_EXIT 27
 #define KEY_RIGHT 'd'
 #define KEY_LEFT 'a'
@@ -13,56 +13,75 @@
 #define ANSI_COLOR_RESET    "\x1b[0m"
 namespace MuSoeun
 {
-	void gotoxy(int x, int y) {
-		//x, y ¡¬«• º≥¡§
+	//xÏ∂ï yÏ∂ï Ïù¥Îèô
+	void gotoxy(int x, int y)
+	{
+		//x, y Ï¢åÌëú ÏÑ§Ï†ï
 		COORD pos = { x - 1,y - 1 };
-		//ƒøº≠ ¿Ãµø
-		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);		
+		//Ïª§ÏÑú Ïù¥Îèô
+		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
+	}
+
+	//Cursor ÏÉÅÌÉú
+	void SetCursorState(bool visible)
+	{
+		CONSOLE_CURSOR_INFO consoleCursorInfo;
+		consoleCursorInfo.bVisible = visible;
+		consoleCursorInfo.dwSize = 1;
+		SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &consoleCursorInfo);
 	}
 
 	class MGameLoop
 	{
 	public:
 		bool isGameRunning = false;
+		bool isRendering = false;
 		MGameLoop() {}
 		~MGameLoop() {}
+
+		//Ï¥àÍ∏∞Ìôî
 		void Initialize()
 		{
+			SetCursorState(false);
+
+			gotoxy(3, 15);
+			std::cout << ANSI_COLOR_RESET"Í≤åÏûÑ Ï¥àÍ∏∞Ìôî" << std::endl;
 			isGameRunning = true;
-			gotoxy(0, 10);
-			std::cout << "√ ±‚»≠ øœ∑·" << std::endl;
 		}
+
+		//Ï¢ÖÎ£å
 		void Release()
 		{
-			gotoxy(0, 10);
-			std::cout << "Ω√Ω∫≈€ «ÿ¡¶ øœ∑·" << std::endl;
+			gotoxy(3, 18);			
+			std::cout << ANSI_COLOR_RESET"Í≤åÏûÑ Ï¢ÖÎ£åÏ§ë" << std::endl;
 		}
 
+		//ÏóÖÎç∞Ïù¥Ìä∏
 		void Update()
 		{
-			gotoxy(0, 10);
-			std::cout << "æ˜µ•¿Ã∆Æ¡ﬂ..." << std::endl;
-
+			gotoxy(3, 16);
+			std::cout << ANSI_COLOR_RESET"Í≤åÏûÑ ÌÇ§ÏûÖÎ†• ÎåÄÍ∏∞" << std::endl;
 			if (_kbhit())
 			{
 				KeyEvent(_getch());
 			}
-
 		}
-
+		//Î†åÎçîÎßÅ
 		void Render()
 		{
-			gotoxy(0, 10);
-			std::cout << "∑ª¥ı∏µ øœ∑·" << std::endl;
+			gotoxy(3, 17);
+			std::cout << "Í≤åÏûÑ ÌôîÎ©¥ Í∑∏Î¶¨Í∏∞" << std::endl;
 		}
 
+		//Ïã§ÌñâÎ¨∏
 		void Run()
 		{
 			Initialize();
 			while (isGameRunning)
 			{
 				Update();
-				Render();
+				if (isRendering)
+					Render();
 			}
 			Release();
 		}
@@ -71,28 +90,81 @@ namespace MuSoeun
 		{
 			switch (keyInput)
 			{
-			case KEY_LEFT: //a : øﬁ¬ 
-				gotoxy(2,5);
-				std::cout << ANSI_COLOR_YELLOW"øﬁ¬ ¿Ã ¥≠∑»¥Ÿ!  " << std::endl;
+			case KEY_LEFT: //a : ÏôºÏ™Ω
+				gotoxy(2, 5);
+				std::cout << ANSI_COLOR_YELLOW"ÏôºÏ™ΩÏù¥ ÎàåÎ†∏Îã§!  " << std::endl;
 				break;
 
-			case KEY_RIGHT: //d : ø¿∏•¬ 
-				gotoxy(2,5);
-				std::cout << ANSI_COLOR_YELLOW"ø¿∏•¬ ¿Ã ¥≠∑»¥Ÿ!" << std::endl;
+			case KEY_RIGHT: //d : Ïò§Î•∏Ï™Ω
+				gotoxy(2, 5);
+				std::cout << ANSI_COLOR_YELLOW"Ïò§Î•∏Ï™ΩÏù¥ ÎàåÎ†∏Îã§!" << std::endl;
 				break;
 
-				/*27: ESC ∞‘¿”¡æ∑·≈∞
-				«—π¯ ¥≠∑∂¿ª∂© ¿œΩ√¡§¡ˆ
-				µŒπ¯ ¥≠∑∂¿ª∂© ∞‘¿”¡æ∑·*/
+				/*27: ESC Í≤åÏûÑÏ¢ÖÎ£åÌÇ§
+				ÌïúÎ≤à ÎàåÎ†ÄÏùÑÎïê ÏùºÏãúÏ†ïÏßÄ
+				ÎëêÎ≤à ÎàåÎ†ÄÏùÑÎïê Í≤åÏûÑÏ¢ÖÎ£å*/
+
 			case KEY_EXIT:
-				isGameRunning = false;
-				//24¿œ 8¡÷¬˜ ∞˙¡¶
-				std::cout << "¡§∏ª ∞‘¿”¿ª ¡æ∑·«œΩ√∞⁄Ω¿¥œ±Ó?" << std::endl;
+			{
+				char decideExit;
+				bool isExitYes = false;
+				//24Ïùº 8Ï£ºÏ∞® Í≥ºÏ†ú
+				system("cls");
+				std::cout << "Ï†ïÎßê Í≤åÏûÑÏùÑ Ï¢ÖÎ£åÌïòÏãúÍ≤†ÏäµÎãàÍπå?" << std::endl;
+				gotoxy(1, 10);
+				std::cout << "[Ïòà]" << std::endl;
+				gotoxy(10, 10);
+				std::cout << "[ÏïÑÎãàÏöî]" << std::endl;
+
+				while (isGameRunning)
+				{
+					decideExit = _getch(); //a,d ÏûÖÎ†•					
+					switch (decideExit)
+					{
+					case KEY_LEFT: //a : ÏôºÏ™Ω
+						gotoxy(1, 10);
+						std::cout << ANSI_COLOR_YELLOW"[Ïòà]" << std::endl;	//ÌôúÏÑ±ÌôîÎêú Î©îÎâ¥ ÎÖ∏ÎûÄÏÉâ
+
+						gotoxy(10, 10);
+						std::cout << ANSI_COLOR_RESET"[ÏïÑÎãàÏöî]" << std::endl;	//ÎπÑÌôúÏÑ±Ìôî Î©îÎâ¥ ÏõêÎûò ÏÉâÏÉÅ
+
+						isExitYes = true;	
+
+						break;
+
+					case KEY_RIGHT: //d : Ïò§Î•∏Ï™Ω
+						gotoxy(10, 10);
+						std::cout << ANSI_COLOR_YELLOW"[ÏïÑÎãàÏöî]" << std::endl;	//ÌôúÏÑ±ÌôîÎêú Î©îÎâ¥ ÎÖ∏ÎûÄÏÉâ
+
+						gotoxy(1, 10);
+						std::cout << ANSI_COLOR_RESET"[Ïòà]" << std::endl;	//ÎπÑÌôúÏÑ±Ìôî Î©îÎâ¥ ÏõêÎûò ÏÉâÏÉÅ
+						isExitYes = false;	
+
+						break;
+
+					case KEY_ENTER:	//ÏóîÌÑ∞ÌÇ§Î•º ÏûÖÎ†•ÌñàÏùÑÎïå
+						if (isExitYes)	//isExitYesÍ∞Ä Ï∞∏ÏùºÎïå Í≤åÏûÑÏ¢ÖÎ£å
+						{
+							system("cls");
+							isGameRunning = false;
+						}
+
+						else	//isExitYesÍ∞Ä Í±∞ÏßìÏùºÎïå messageÏ∂úÎ†•ÎêòÎ©¥ÏÑú Í≤åÏûÑ Í≥ÑÏÜç Ïã§Ìñâ
+						{
+							std::cout << ANSI_COLOR_GREEN"\r[ÏïÑÎãàÏöî]Î•º ÏÑ†ÌÉùÌïòÏòÄÏäµÎãàÎã§.";
+						}
+
+						break;
+					default:
+						break;
+					}
+				}
+			}
 				break;
 
 			case KEY_ENTER:
 				gotoxy(2, 5);
-				std::cout << ANSI_COLOR_YELLOW"ø£≈Õ∞° ¥≠∑»¥Ÿ!  " << std::endl;
+				std::cout << ANSI_COLOR_YELLOW"ÏóîÌÑ∞Í∞Ä ÎàåÎ†∏Îã§!  " << std::endl;
 				break;
 
 			default:
