@@ -28,13 +28,13 @@ int main()
 		
 		DrawBuffer();
 
-		deltaTime = GetTickCount() - time_end;
+		/*deltaTime = GetTickCount() - time_end;
 		time_end = GetTickCount();
 		if (deltaTime < 33)
 			Sleep(33 - deltaTime);
 
 		if (deltaTime != 0)
-			printf("time : %d \nfps :%d\n", deltaTime, 1000 / deltaTime);
+			printf("time : %d \nfps :%d\n", deltaTime, 1000 / deltaTime);*/
 
 		if (_kbhit()) // 키가 눌렸는지 확인
 		{
@@ -51,7 +51,6 @@ int main()
 
 		while (isGameStarting)
 		{
-			ClearBuffer();
 			
 			startSnakeGame();
 		}
