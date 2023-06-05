@@ -66,7 +66,7 @@ int main()
 
 int Initialize()
 {
-	setScreenSize(70, 20);
+	setScreenSize(80, 25);
 
 	ClearBuffer();
 

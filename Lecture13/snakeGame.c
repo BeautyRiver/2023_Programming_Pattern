@@ -94,7 +94,11 @@ void startSnakeGame() {
         ClearBuffer();
         for (int i = 0; i < snake.length; ++i) 
         {
-            WriteToBuffer(snake.body[i].x, snake.body[i].y, "@");
+            WriteToBuffer(snake.body[i].x, snake.body[i].y, "@");                        
+            if (snake.body[i].x == snake.body[0].x && snake.body[i].y == snake.body[0].y)
+            {
+                WriteToBuffer(snake.body[i].x, snake.body[i].y, "O");
+            }
         }
 
         if (fruit.isActive) 
@@ -105,7 +109,7 @@ void startSnakeGame() {
         DrawBuffer();
 
         /* 200 ms µô·¹ÀÌ */
-        Sleep(180);
+        Sleep(150);
     }
 }
 
