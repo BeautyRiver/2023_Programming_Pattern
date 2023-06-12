@@ -1,7 +1,4 @@
 #include "screen.h"
-#include <Windows.h>
-
-
 
 void setScreenSize(int width, int height)
 {
@@ -29,6 +26,14 @@ void setCursorPos(int x, int y)
 {
 	COORD pos = { x, y };
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
+}
+//커서비활성화
+void SetCursorState(int visible)
+{
+	CONSOLE_CURSOR_INFO consoleCursorInfo;
+	consoleCursorInfo.bVisible = visible;
+	consoleCursorInfo.dwSize = 1;
+	SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &consoleCursorInfo);
 }
 
 // 0000(배경) 0000(글자)
