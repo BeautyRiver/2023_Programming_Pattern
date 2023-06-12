@@ -71,7 +71,11 @@ int main()
 
 int Initialize()
 {
+<<<<<<< HEAD
 	setScreenSize(MAP_WIDTH, MAP_HEIGHT);
+=======
+	setScreenSize(80, 25);
+>>>>>>> a54caef8e0f9a26af9eac2e4df1971e72ee8ec49
 
 	ClearBuffer();
 

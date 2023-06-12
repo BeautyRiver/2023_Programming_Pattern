@@ -81,6 +81,7 @@ void startSnakeGame(int *life)
 			fruit.isActive = 1;
 		}
 
+<<<<<<< HEAD
 		/* 자신의 몸에 닿거나 벽에 닿을시 */
 		for (int i = 1; i < snake.length; ++i)
 		{
@@ -98,6 +99,18 @@ void startSnakeGame(int *life)
 			*life--;
 			return 0;
 		}
+=======
+        /* 화면에 그리기 */
+        ClearBuffer();
+        for (int i = 0; i < snake.length; ++i) 
+        {
+            WriteToBuffer(snake.body[i].x, snake.body[i].y, "@");                        
+            if (snake.body[i].x == snake.body[0].x && snake.body[i].y == snake.body[0].y)
+            {
+                WriteToBuffer(snake.body[i].x, snake.body[i].y, "O");
+            }
+        }
+>>>>>>> a54caef8e0f9a26af9eac2e4df1971e72ee8ec49
 
 		/* 화면에 그리기 */
 		ClearBuffer();
@@ -106,6 +119,7 @@ void startSnakeGame(int *life)
 			WriteToBuffer(snake.body[i].x, snake.body[i].y, "@");
 		}
 
+<<<<<<< HEAD
 		if (fruit.isActive)
 		{
 			WriteToBuffer(fruit.pos.x, fruit.pos.y, "#");
@@ -125,6 +139,11 @@ void startSnakeGame(int *life)
 		/* 150 ms 딜레이 */
 		Sleep(150);
 	}
+=======
+        /* 200 ms 딜레이 */
+        Sleep(150);
+    }
+>>>>>>> a54caef8e0f9a26af9eac2e4df1971e72ee8ec49
 }
 
 
