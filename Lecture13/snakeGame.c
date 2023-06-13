@@ -8,15 +8,11 @@
 #define LEFT 'a'
 #define RIGHT 'd'
 
-int life = 3;
+void FruitRandomPos(Position* pos);
+/* 생명력, 죽었는지 검사, ESC창이 떠있는지 검사 */
+int life = 0;
 int isDie = 1;
 int isEscapeOn = 0;
-//과일 랜덤 배치 함수
-void FruitRandomPos(Position* pos)
-{
-	pos->x = rand() % screenWidth + 1;
-	pos->y = rand() % screenHeight + 1;
-}
 
 void startSnakeGame()
 {
@@ -61,6 +57,7 @@ void startSnakeGame()
 		time_end = GetTickCount();
 		DeltaTime = time_end - time_start;
 		DeltaTimeSum += DeltaTime;
+
 		if (DeltaTimeSum >= 150)
 		{
 			/* 뱀 위치 업데이트 */
@@ -134,6 +131,7 @@ void startSnakeGame()
 		if (isEscapeOn)
 		{
 			ClearBuffer();
+			/* 1.계속하기, 2.메인메뉴 */
 			WriteToBuffer((MAP_WIDTH - strlen(SELECT_CONTINUE) - 30) / 2, 17, SELECT_CONTINUE);
 			WriteToBuffer((MAP_WIDTH - strlen(SELECT_CONTINUE) + 30) / 2, 17, SELECT_EXIT);
 			DrawBuffer();
@@ -154,23 +152,34 @@ void startSnakeGame()
 		{
 			WriteToBuffer(fruit.pos.x, fruit.pos.y, "#");
 		}
-		printf("Score: %d\n", score);
-
-		
-
-		if (DeltaTime != 0) {
+		printf("Score: %d\n", score);		
+					
+		if (DeltaTime != 0) 
+		{
 			printf("Frame time: %d ms, Frame rate: %d fps\n", DeltaTime, 1000 / DeltaTime);
 		}
-		DrawBuffer();
-
-		/* 120 ms 딜레이 */
-		//Sleep(120);
+		DrawBuffer();		
 	}
-
+	
 	if (life == 0)
 	{
 		ClearBuffer();
-		WriteToBuffer((MAP_WIDTH - strlen(GAMEOVER_MSG)) / 2, MAP_HEIGHT / 2, GAMEOVER_MSG);
+		WriteToBuffer((MAP_WIDTH - strlen(GAMEOVER_MSG)) / 2, MAP_HEIGHT / 2, GAMEOVER_MSG);		
 		DrawBuffer();
+		Sleep(2000);	
+
+		ClearBuffer();
+		//TODO~파일입출력 랭킹
+		//WriteToBuffer((MAP_WIDTH - strlen(GAMEOVER_MSG)) / 2, MAP_HEIGHT / 2, GAMEOVER_MSG);
+		DrawBuffer();
+		Sleep(2000);
 	}
+	
+}
+
+//과일 랜덤 배치 함수
+void FruitRandomPos(Position* pos)
+{
+	pos->x = rand() % screenWidth + 1;
+	pos->y = rand() % screenHeight + 1;
 }

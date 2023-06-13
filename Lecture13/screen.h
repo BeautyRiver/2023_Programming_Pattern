@@ -23,14 +23,25 @@
 #define INTRO_MSG3 "자신의 몸이나 벽에 부딪히면 LIFE가 감소합니다."
 #define INTRO_MSG4 ""
 #define INTRO_KEY_START "|조작 방법|"
-#define INTRO_MSG5 "최고 점수를 얻기 위해 최대한 많은 음식을 먹어야 합니다."
-#define INTRO_MSG6 "즐겁고 중독성 있는 게임 플레이를 경험해보세요!"
+#define INTRO_MSG5 "최고 점수를 얻기 위해 최대한 많은 과을(#)을 먹어야 합니다."
+#define INTRO_MSG6 "SNAKE길이를 늘려 순위를 기록하고 경쟁하세요!!"
 
 /* 인게임 */
 #define GAMEOVER_MSG "GAME OVER"
+#define GAMEOVER_MSG1 "GAME OVER"
 #define LIFE_MSG "LIFE: "
 #define SELECT_CONTINUE "1.계속하기"
 #define SELECT_EXIT "2.그만하기"
+
+/*
+   ____    _    __  __ _____    _____     _______ ____
+  / ___|  / \  |  \/  | ____|  / _ \ \   / / ____|  _ \
+ | |  _  / _ \ | |\/| |  _|   | | | \ \ / /|  _| | |_) |
+ | |_| |/ ___ \| |  | | |___  | |_| |\ V / | |___|  _ <
+  \____/_/   \_\_|  |_|_____|  \___/  \_/  |_____|_| \_\
+
+
+*/
 
 #include <Windows.h>
 #include <stdio.h>
