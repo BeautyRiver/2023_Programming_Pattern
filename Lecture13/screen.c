@@ -5,7 +5,7 @@ void setScreenSize(int width, int height)
 	screenWidth = width;
 	screenHeight = height;
 
-	int bufferSize = (width + 3) * (height + 2);
+	int bufferSize = (screenWidth + 4) * (screenHeight + 2);
 
 	if (ScreenBuffer != NULL) 
 	{
@@ -79,5 +79,12 @@ int WriteToBuffer(int x, int y, const char* str)
 		i = i + 1;
 	}
 
+	return 0;
+}
+
+int DrawBuffer()
+{
+	setCursorPos(0, 0);
+	printf("%s", ScreenBuffer);
 	return 0;
 }

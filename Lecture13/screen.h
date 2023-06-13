@@ -1,4 +1,37 @@
 #pragma once
+//맵 크기
+#define MAP_WIDTH 70
+#define MAP_HEIGHT 20
+
+//메시지
+/* 타이틀 */
+#define TITLE_MSG "SNAKE GAME"
+#define TITLE_MSG1 "       _____ _   _____    __ __ ______   _________    __  _________"
+#define TITLE_MSG2 "     / ___// | / /   |  / //_// ____/  / ____/   |  /  |/  / ____/"
+#define TITLE_MSG3 "  \\__ \\/  |/ / /| | / ,<  / __/    / / __/ /| | / /|_/ / __/"
+#define TITLE_MSG4 " ___/ / /|  / ___ |/ /| |/ /___   / /_/ / ___ |/ /  / / /___"
+#define TITLE_MSG5 "/____/_/ |_/_/  |_/_/ |_/_____/   \\____/_/  |_/_/  /_/_____/"
+
+#define TITLE_MENU1 "1.게임 시작"
+#define TITLE_MENU2 "2.게임 설명"
+#define TITLE_MENU3 "3.게임 종료"
+
+/* 게임설명 */
+#define INTRO_START "|게임 설명|"
+#define INTRO_MSG1 "SNAKE GAME은 뱀을 조종하여 과일(#)을 먹고"
+#define INTRO_MSG2 "뱀을 점점 길어제기 만드는 게임입니다."
+#define INTRO_MSG3 "자신의 몸이나 벽에 부딪히면 LIFE가 감소합니다."
+#define INTRO_MSG4 ""
+#define INTRO_KEY_START "|조작 방법|"
+#define INTRO_MSG5 "최고 점수를 얻기 위해 최대한 많은 음식을 먹어야 합니다."
+#define INTRO_MSG6 "즐겁고 중독성 있는 게임 플레이를 경험해보세요!"
+
+/* 인게임 */
+#define GAMEOVER_MSG "GAME OVER"
+#define LIFE_MSG "LIFE: "
+#define SELECT_CONTINUE "1.계속하기"
+#define SELECT_EXIT "2.그만하기"
+
 #include <Windows.h>
 #include <stdio.h>
 #include <conio.h>
@@ -15,4 +48,4 @@ void SetColor(unsigned short backGroundColor, unsigned short textColor);
 
 void ClearBuffer();
 int WriteToBuffer(int x, int y, const char* str);
-
+int DrawBuffer();
