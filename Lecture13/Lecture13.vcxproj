@@ -128,11 +128,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.c" />
+    <ClCompile Include="ranking.c" />
     <ClCompile Include="screen.c" />
     <ClCompile Include="snakeGame.c" />
     <ClCompile Include="util.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ranking.h" />
     <ClInclude Include="screen.h" />
     <ClInclude Include="snakeGame.h" />
     <ClInclude Include="util.h" />

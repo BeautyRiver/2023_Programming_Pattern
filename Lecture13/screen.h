@@ -14,34 +14,30 @@
 
 #define TITLE_MENU1 "1.게임 시작"
 #define TITLE_MENU2 "2.게임 설명"
-#define TITLE_MENU3 "3.게임 종료"
+#define TITLE_MENU3 "3.게임 랭킹"
+#define TITLE_MENU4 "4.게임 종료"
 
 /* 게임설명 */
 #define INTRO_START "|게임 설명|"
 #define INTRO_MSG1 "SNAKE GAME은 뱀을 조종하여 과일(#)을 먹고"
-#define INTRO_MSG2 "뱀을 점점 길어제기 만드는 게임입니다."
+#define INTRO_MSG2 "뱀을 점점 길어지게 만드는 게임입니다."
 #define INTRO_MSG3 "자신의 몸이나 벽에 부딪히면 LIFE가 감소합니다."
-#define INTRO_MSG4 ""
+#define INTRO_MSG4 "LIFE가 0이 될시 GAME OVER가 됩니다."
+#define INTRO_MSG5 "뱀의 길이를 늘려 순위를 기록하고 경쟁하세요!!"
+
 #define INTRO_KEY_START "|조작 방법|"
-#define INTRO_MSG5 "최고 점수를 얻기 위해 최대한 많은 과을(#)을 먹어야 합니다."
-#define INTRO_MSG6 "SNAKE길이를 늘려 순위를 기록하고 경쟁하세요!!"
+#define INTRO_MSG6 "ESC(인게임내) - 일시정지"
+#define INTRO_MSG7 "W,A,S,D / 키보드 방향키"
+#define INTRO_MSG8 "상하좌우 이동"
 
 /* 인게임 */
 #define GAMEOVER_MSG "GAME OVER"
 #define GAMEOVER_MSG1 "GAME OVER"
+#define ENTER_NAME "Please enter your name: "
 #define LIFE_MSG "LIFE: "
 #define SELECT_CONTINUE "1.계속하기"
+#define SELECT_RESTART "1.다시하기"
 #define SELECT_EXIT "2.그만하기"
-
-/*
-   ____    _    __  __ _____    _____     _______ ____
-  / ___|  / \  |  \/  | ____|  / _ \ \   / / ____|  _ \
- | |  _  / _ \ | |\/| |  _|   | | | \ \ / /|  _| | |_) |
- | |_| |/ ___ \| |  | | |___  | |_| |\ V / | |___|  _ <
-  \____/_/   \_\_|  |_|_____|  \___/  \_/  |_____|_| \_\
-
-
-*/
 
 #include <Windows.h>
 #include <stdio.h>

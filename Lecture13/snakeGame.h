@@ -18,7 +18,5 @@ typedef struct {
     int isActive;
 } Fruit;
 
-int score;
-
 void FruitRandomPos(Position* pos);
-void startSnakeGame();
+int startSnakeGame();
