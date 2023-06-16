@@ -12,17 +12,18 @@
 void FruitRandomPos(Position* pos);
 /* 생명력, 죽었는지 검사, Pause창이 떠있는지 검사, 그만하기를 눌렀는지 검사 */
 
-int life = 2;
-int isDie = 1;
-int isPauseOn = 0;
-int score = 0;
+int life = 3; //생명력
+int isDie = 1; //죽었는지 검사
+int isPauseOn = 0; //Pause창이 열린 상태인지 검사
+int score = 0; //점수
+int snakeLengthSave = 3; //Snake의 길이 저장변수 (life가 감소해도 길이는 그대로 재시작)
 
 int startSnakeGame()
-{
+{	
 	Snake snake;
 	Fruit fruit;
-	Position initialBody[SNAKE_SIZE] = { {20, 10}, {21, 10}, {22, 10} }; /* 뱀의 초기위치 {머리}{꼬리1}{꼬리2} ... */
-	snake.length = 3;
+	Position initialBody[SNAKE_SIZE] = { {20, 10}, {21, 10}, {22, 10} }; /* 뱀의 초기위치 {머리}{꼬리1}{꼬리2} ... */	
+	snake.length = snakeLengthSave;
 	snake.body = initialBody;
 	snake.direction = LEFT;
 
@@ -36,7 +37,7 @@ int startSnakeGame()
 	int fruitScore = 50;
 	while (1)
 	{
-		//뱀 움직임 딜레이 조절 (난이도 조절)
+		//뱀 움직임 딜레이 조절 및 점수조정 (난이도 조절)
 		Sleep(sleepDelay);
 		if (score >= 300) 
 		{
@@ -125,7 +126,8 @@ int startSnakeGame()
 		if (snake.body[0].x == fruit.pos.x && snake.body[0].y == fruit.pos.y)
 		{
 			fruit.isActive = 0;
-			snake.length++;
+			snakeLengthSave++;
+			snake.length = snakeLengthSave;
 			score += fruitScore;
 			FruitRandomPos(&(fruit.pos));
 			fruit.isActive = 1;
@@ -139,7 +141,9 @@ int startSnakeGame()
 				/* life - 1*/
 				life--;
 				isDie = 1;
-				return 1;
+				snake.body = initialBody;
+				snake.direction = LEFT;
+				break;
 			}
 		}
 		if (snake.body[0].x <= 0 || snake.body[0].x >= screenWidth + 1 ||
@@ -148,7 +152,9 @@ int startSnakeGame()
 			/* life - 1 */
 			life--;
 			isDie = 1;
-			return 1;
+			snake.body = initialBody;
+			snake.direction = LEFT;
+			break;
 		}
 
 		/* 화면에 그리기 Draw*/
@@ -187,7 +193,7 @@ int startSnakeGame()
 
 		//LIFE가 0일때
 		if (life == 0)
-		{
+		{			
 			ClearBuffer();
 			WriteToBuffer((MAP_WIDTH - strlen(GAMEOVER_MSG)) / 2, MAP_HEIGHT / 2, GAMEOVER_MSG);
 			DrawBuffer();
@@ -204,7 +210,7 @@ int startSnakeGame()
 			name[strcspn(name, "\n")] = '\0';			
 
 			/* 1.다시하기, 2.메인메뉴 */
-			WriteToBuffer((MAP_WIDTH - strlen("1. 메인메뉴로")) / 2, 18, "1. 메인메뉴로");
+			WriteToBuffer((MAP_WIDTH - strlen("아무키를 입력해주세요...")) / 2, 18, "아무키를 입력해주세요...");
 			DrawBuffer();
 			Score newScore;
 			strcpy(newScore.name, name);
@@ -213,17 +219,12 @@ int startSnakeGame()
 			loadAndSortScores("ranking.txt");
 			
 			char escape;
-			escape = _getch();
-			if (escape == '1')
-			{
-				return 0;
-			}
-
-
-			//"2. 그만하기"를 누를때 OR 사망했을때			
-		exit:
-			life = 2;
-			isPauseOn = 0;
+			escape = _getch();											
+		exit:			
+			isPauseOn = 0; //pause창 끄기	
+			snakeLengthSave = 3; //길이다시 3으로 초기화			
+			life = 2; //life 초기화
+			isDie = 1; //LIFE 화면에 띄워주는 bool값 다시 참으로
 			ClearBuffer();
 			return 0;
 

@@ -101,12 +101,11 @@ int main()
 			loadAndSortScores("ranking.txt");
 			char escape;
 			escape = _getch();
-			if (escape == '1')
+			if (escape == '1') //메인화면으로
 			{
 				isGameRanking = 0;
 			}
 		}
-
 	}	
 	CHECKERROR(Release());	
 	exit(0);

@@ -1,3 +1,9 @@
 kmg 0
 l 1100
 r 0
+MINS 0
+hi 100
+hey 50
+hey 150
+heery 250
+minkang 250
