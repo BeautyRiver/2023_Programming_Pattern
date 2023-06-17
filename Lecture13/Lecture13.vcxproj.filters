@@ -21,9 +21,6 @@
     <ClCompile Include="screen.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="util.c">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="snakeGame.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -33,9 +30,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="screen.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="util.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="snakeGame.h">

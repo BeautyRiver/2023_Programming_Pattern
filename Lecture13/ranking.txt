@@ -2,3 +2,4 @@ NO 150kimminkang1 350
 minkang2 100
 2313 0
 213 100
+hi 0

@@ -1,5 +1,4 @@
 ﻿#include "screen.h"
-#include "util.h"
 #include "snakeGame.h"
 
 int Initialize();
@@ -12,7 +11,7 @@ int main()
 	int isSnakeGameStarting = 0;
 	int isGameIntroduce = 0;
 	int isGameRanking = 0;
-	CHECKERROR(Initialize());
+	Initialize();
 
 	while (isGameRunning)
 	{				
@@ -72,7 +71,7 @@ int main()
 			}
 		}
 	}	
-	CHECKERROR(Release());	
+	Release();	
 	exit(0);
 	return 0;
 }

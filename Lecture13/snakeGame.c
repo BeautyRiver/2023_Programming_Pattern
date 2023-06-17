@@ -27,7 +27,7 @@ int startSnakeGame()
 	snake.body = initialBody;
 	snake.direction = LEFT;
 	
-	FruitRandomPos(&fruit.pos); //사과 랜덤배치
+	FruitRandomPos(&fruit.pos); //과일 랜덤배치
 	fruit.isActive = 1;
 
 	//Frame관련   
@@ -252,6 +252,7 @@ int startSnakeGame()
 
 //과일 랜덤 배치 함수
 void FruitRandomPos(Position* pos)
+
 {
 	pos->x = rand() % screenWidth + 1;
 	pos->y = rand() % screenHeight + 1;
