@@ -1,10 +1,5 @@
 #pragma once
-#include <stdlib.h>
 #include <conio.h>
-typedef enum {
-    UP, DOWN, LEFT, RIGHT
-} Direction;
-
 typedef struct {
     int x;
     int y;

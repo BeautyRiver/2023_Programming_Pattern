@@ -1,11 +1,10 @@
 #define _CRT_SECURE_NO_WARNINGS
-#include <stdio.h>
 #include "screen.h"
 // 점수와 이름을 담는 구조체
 typedef struct Score
 {
     int score;
-    char name[10];
+    char name[15];
 } Score;
 
 // 파일에 점수를 기록하는 함수

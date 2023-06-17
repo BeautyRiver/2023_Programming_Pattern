@@ -1,5 +1,6 @@
 #include "screen.h"
 
+
 void setScreenSize(int width, int height)
 {
 	screenWidth = width;
