@@ -1,41 +1,61 @@
 ﻿#include "screen.h"
 #include "snakeGame.h"
 
+
 int Initialize();
 int Release();
 int WriteTitleScreenMsg();
 int WriteIntroduceScreenMsg();
 int main()
-{	
+{
 	int isGameRunning = 1;
 	int isSnakeGameStarting = 0;
 	int isGameIntroduce = 0;
 	int isGameRanking = 0;
+	int selectHeight = 14; //화살표▶ 메뉴 SELECT 세로위치 변수
 	Initialize();
 
 	while (isGameRunning)
-	{				
-		WriteTitleScreenMsg(); //TitleScreen메시지 출력
+	{
+		ClearBuffer();
+		/* TITLE SCREEN 설명 */
+		SetCursorState(0); //커서비활성화
+		SetColor(0, 15); //흰색으로
+		WriteTitleScreenMsg(); //TitleScreen메시지 버퍼입력
 
+		/* 화살표▶ 메뉴 SELECT */
+		WriteToBuffer((MAP_WIDTH - strlen(TITLE_MENU1) - 6) / 2, selectHeight, "▶");
 		if (_kbhit()) // 키가 눌렸는지 확인
-		{
-			char ch = _getch(); 
-			if (ch == '1') // '1' 입력시 게임시작			
-				isSnakeGameStarting = 1;
+		{			
+			ClearBuffer();
 
-			else if (ch == '2')	// '2' 입력시 설명
-				isGameIntroduce = 1;
-
-			else if (ch == '3') // '3'입력시 랭킹창
-				isGameRanking = 1;
-
-			else if (ch == '4')	 // '4' 입력시 종료				
-				isGameRunning = 0; // 게임 종료	
-		}		
+			int ch = _getch();
+			if (ch == KEY_UP)
+			{
+				if (selectHeight > 14)	selectHeight -= 1;
+				WriteToBuffer((MAP_WIDTH - strlen(TITLE_MENU1) - 6) / 2, selectHeight, "▶");
+				DrawBuffer();
+			}
+			else if (ch == KEY_DOWN)
+			{
+				if (selectHeight < 17)	selectHeight += 1;
+				WriteToBuffer((MAP_WIDTH - strlen(TITLE_MENU1) - 6) / 2, selectHeight, "▶");
+				DrawBuffer();
+			}
+			if (ch == KEY_ENTER)
+			{
+				if (selectHeight == 14)	isSnakeGameStarting = 1;
+				else if (selectHeight == 15) isGameIntroduce = 1;
+				else if (selectHeight == 16) isGameRanking = 1;
+				else if (selectHeight == 17) isGameRunning = 0;
+			}
+		}
+		DrawBuffer(); //버퍼출력
 
 		/* 게임START */
-		while (isSnakeGameStarting) 
-		{			
+		while (isSnakeGameStarting)
+		{
+			SetColor(0, 2); //초록색으로
 			ClearBuffer();
 			if (startSnakeGame() == 0) //return 값이 0일때 : gameover 되거나 그만하기 눌렀을때 (정상종료)
 			{
@@ -44,10 +64,10 @@ int main()
 				system("cls");
 			}
 		}
-						
+
 		/* 게임설명 창 */
 		while (isGameIntroduce)
-		{			
+		{
 			WriteIntroduceScreenMsg(); //Introduce 메시지 출력
 			char escape;
 			escape = _getch();
@@ -55,30 +75,32 @@ int main()
 			{
 				isGameIntroduce = 0;
 			}
-		}	
+		}
 		/* 게임 랭킹 창 */
 		while (isGameRanking)
 		{
 			ClearBuffer();
-			WriteToBuffer((MAP_WIDTH - strlen("1. 메인메뉴로")) / 2, 18, "1. 메인메뉴로");
+			WriteToBuffer((MAP_WIDTH - strlen("Enter 메인메뉴로")) / 2, 18, "Enter 메인메뉴로");
 			DrawBuffer();
 			loadAndSortScores("ranking.txt");
 			char escape;
 			escape = _getch();
-			if (escape == '1') //메인화면으로
+			if (escape == KEY_ENTER) //메인화면으로
 			{
 				isGameRanking = 0;
 			}
 		}
-	}	
-	Release();	
+	}
+	WriteToBuffer((MAP_WIDTH - strlen("게임을 종료합니다...")) / 2, MAP_HEIGHT / 2, "게임을 종료합니다...");
+	DrawBuffer();
+	Release();
 	exit(0);
 	return 0;
 }
 
 int Initialize()
 {
-	setScreenSize(MAP_WIDTH, MAP_HEIGHT);	
+	setScreenSize(MAP_WIDTH, MAP_HEIGHT);
 	ClearBuffer();
 
 	return 0;
@@ -87,22 +109,17 @@ int Initialize()
 //메모리 해제
 int Release()
 {
-	if (ScreenBuffer != NULL) 
+	if (ScreenBuffer != NULL)
 	{
-		free(ScreenBuffer);		
+		free(ScreenBuffer);
 		ScreenBuffer = NULL;
 	}
-	
+
 	return 0;
 }
 
 int WriteTitleScreenMsg()
 {
-	ClearBuffer();
-	/* TITLE SCREEN 설명 */
-	SetCursorState(0); //커서비활성화
-	SetColor(0b0000, 0b0010);
-
 	/*SNAKE GAME BANNER*/
 	WriteToBuffer((MAP_WIDTH - strlen(TITLE_MSG1)) / 2, 2, TITLE_MSG1);
 	WriteToBuffer((MAP_WIDTH - strlen(TITLE_MSG2)) / 2, 3, TITLE_MSG2);
@@ -115,7 +132,7 @@ int WriteTitleScreenMsg()
 	WriteToBuffer((MAP_WIDTH - strlen(TITLE_MENU2)) / 2, 15, TITLE_MENU2);
 	WriteToBuffer((MAP_WIDTH - strlen(TITLE_MENU3)) / 2, 16, TITLE_MENU3);
 	WriteToBuffer((MAP_WIDTH - strlen(TITLE_MENU4)) / 2, 17, TITLE_MENU4);
-	DrawBuffer();
+
 
 	return 0;
 }

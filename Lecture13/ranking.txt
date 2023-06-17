@@ -3,3 +3,6 @@ minkang2 100
 2313 0
 213 100
 hi 0
+ mins 0
+imminkang 300
+hi 4200

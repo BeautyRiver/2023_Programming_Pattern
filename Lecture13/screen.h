@@ -3,6 +3,13 @@
 #include <stdio.h>
 #include <conio.h>
 #include <stdlib.h>
+//키코드
+#define KEY_UP 72
+#define KEY_DOWN 80
+#define KEY_ENTER 13
+#define KEY_LEFT 75
+#define KEY_RIGHT 77
+
 
 //맵 크기
 #define MAP_WIDTH 70
@@ -17,10 +24,10 @@
 #define TITLE_MSG4 " ___/ / /|  / ___ |/ /| |/ /___   / /_/ / ___ |/ /  / / /___"
 #define TITLE_MSG5 "/____/_/ |_/_/  |_/_/ |_/_____/   \\____/_/  |_/_/  /_/_____/"
 
-#define TITLE_MENU1 "1.게임 시작"
-#define TITLE_MENU2 "2.게임 설명"
-#define TITLE_MENU3 "3.게임 랭킹"
-#define TITLE_MENU4 "4.게임 종료"
+#define TITLE_MENU1 "게임 시작"
+#define TITLE_MENU2 "게임 설명"
+#define TITLE_MENU3 "게임 랭킹"
+#define TITLE_MENU4 "게임 종료"
 
 /* 게임설명 */
 #define INTRO_START "|게임 설명|"
@@ -41,9 +48,9 @@
 #define GAMEOVER_MSG1 "GAME OVER"
 #define ENTER_NAME "Please enter your name: "
 #define LIFE_MSG "LIFE: "
-#define SELECT_CONTINUE "1.계속하기"
-#define SELECT_RESTART "1.다시하기"
-#define SELECT_EXIT "2.그만하기"
+#define SELECT_CONTINUE "계속하기"
+#define SELECT_RESTART "다시하기"
+#define SELECT_EXIT "그만하기"
 
 char *ScreenBuffer;
 

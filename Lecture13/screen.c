@@ -55,11 +55,11 @@ void ClearBuffer()
 		while (x < screenWidth + 2)
 		{
 			if (y == 0 || y == (screenHeight + 1))
-				ScreenBuffer[x + (y * (screenWidth + 3))] = '-';
+				ScreenBuffer[x + (y * (screenWidth + 3))] = '*';
 			else
 			{
 				if (x == 0 || x == (screenWidth + 1))
-					ScreenBuffer[x + (y * (screenWidth + 3))] = '|';
+					ScreenBuffer[x + (y * (screenWidth + 3))] = '*';
 				else
 					ScreenBuffer[x + (y * (screenWidth + 3))] = ' ';
 			}
