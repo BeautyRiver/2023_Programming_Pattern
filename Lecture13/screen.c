@@ -6,15 +6,13 @@ void setScreenSize(int width, int height)
 	screenWidth = width;
 	screenHeight = height;
 
-	int bufferSize = (screenWidth + 4) * (screenHeight + 2);
-
 	if (ScreenBuffer != NULL) 
 	{
 		free(ScreenBuffer);
 		ScreenBuffer = NULL;
 	}
 
-	ScreenBuffer = (char*)malloc(sizeof(char) * bufferSize);
+	ScreenBuffer = (char*)malloc(sizeof(char) * (screenWidth + 4) * (screenHeight + 2));
 
 	if (ScreenBuffer == NULL) 
 	{
@@ -71,7 +69,7 @@ void ClearBuffer()
 	ScreenBuffer[(y * (screenWidth + 3))] = '\0';
 }
 
-int WriteToBuffer(int x, int y, const char* str)
+void WriteToBuffer(int x, int y, const char* str)
 {
 	int i = 0;
 	while (i < strlen(str))
@@ -79,13 +77,10 @@ int WriteToBuffer(int x, int y, const char* str)
 		ScreenBuffer[x + (y * (screenWidth + 3)) + i] = str[i];
 		i = i + 1;
 	}
-
-	return 0;
 }
 
-int DrawBuffer()
+void DrawBuffer()
 {
 	setCursorPos(0, 0);
 	printf("%s", ScreenBuffer);
-	return 0;
 }

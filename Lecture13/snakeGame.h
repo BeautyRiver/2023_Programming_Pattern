@@ -6,7 +6,7 @@ typedef struct {
 } Position;
 
 typedef struct {
-    Position* body; /* 뱀의 길이가 계쏙 증가하기 때문에 동적할당을 위한 포인터 선언 */
+    Position* body;
     int length;
     char direction;
 } Snake;

@@ -6,12 +6,13 @@ int Initialize();
 int Release();
 int WriteTitleScreenMsg();
 int WriteIntroduceScreenMsg();
+
 int main()
 {
-	int isGameRunning = 1;
-	int isSnakeGameStarting = 0;
-	int isGameIntroduce = 0;
-	int isGameRanking = 0;
+	int isGameRunning = 1; //프로그램이 실행중인지 체크하는 변수
+	int isSnakeGameStarting = 0; //뱀게임이 실행체크 변수
+	int isGameIntroduce = 0; //설명창 체크변수
+	int isGameRanking = 0; //랭킹창 체크변수
 	int selectHeight = 14; //화살표▶ 메뉴 SELECT 세로위치 변수
 	Initialize();
 
@@ -71,7 +72,7 @@ int main()
 			WriteIntroduceScreenMsg(); //Introduce 메시지 출력
 			char escape;
 			escape = _getch();
-			if (escape == '1')
+			if (escape == KEY_ENTER) //메인화면으로
 			{
 				isGameIntroduce = 0;
 			}
@@ -156,7 +157,7 @@ int WriteIntroduceScreenMsg()
 
 
 	/* 1.계속하기, 2.메인메뉴 */
-	WriteToBuffer((MAP_WIDTH - strlen("1. 메인메뉴로")) / 2, 18, "1. 메인메뉴로");
+	WriteToBuffer((MAP_WIDTH - strlen("Enter 메인메뉴로")) / 2, 18, "Enter 메인메뉴로");
 	DrawBuffer();
 
 	return 0;

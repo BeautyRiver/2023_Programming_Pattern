@@ -83,10 +83,7 @@ int startSnakeGame()
 			isPauseOn = 1;			
 			ClearBuffer();
 		}
-
-		time_start = time_end;
-		time_end = GetTickCount();
-		DeltaTime = time_end - time_start;
+		
 		/* 뱀 위치 업데이트 */
 		for (int i = snake.length - 1; i > 0; --i)
 		{
@@ -220,9 +217,12 @@ int startSnakeGame()
 		//score, fps 그리기
 		printf("Score: %d\n", score);
 
+		time_start = time_end;
+		time_end = GetTickCount();
+		DeltaTime = time_end - time_start;
 		if (DeltaTime != 0)
 		{
-			printf("Frame time: %d ms, Frame rate: %d fps\n", DeltaTime, 1000 / DeltaTime);
+			printf("Frame time: %d ms, Frame rate: %2d fps \n", DeltaTime, 1000 / DeltaTime);
 		}
 
 		//LIFE가 0일때

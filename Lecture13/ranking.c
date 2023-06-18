@@ -1,11 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
+#include "ranking.h"
 #include "screen.h"
 // 점수와 이름을 담는 구조체
-typedef struct Score
-{
-    int score;
-    char name[15];
-} Score;
 
 // 파일에 점수를 기록하는 함수
 void recordScore(const char* fileName, Score score)
@@ -66,6 +62,19 @@ void loadAndSortScores(const char* fileName)
     for (int i = 0; i < count && i < 10; ++i)
     {
         setCursorPos(20, 3 + i);
+
+        if (i == 0) //1등 금색
+            SetColor(0, 14); 
+
+        else if (i == 1) //2등 은색
+            SetColor(0, 8); 
+
+        else if (i == 2) //3등 동색
+            SetColor(0, 6); 
+        
+        else
+            SetColor(0, 15); 
+
         printf("[%2d등] %-15s  %5d Score\n", i + 1, scores[i].name, scores[i].score);
         
     }

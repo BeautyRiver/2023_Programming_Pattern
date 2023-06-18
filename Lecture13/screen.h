@@ -63,5 +63,5 @@ void SetCursorState(int visible);
 void SetColor(unsigned short backGroundColor, unsigned short textColor);
 
 void ClearBuffer();
-int WriteToBuffer(int x, int y, const char* str);
-int DrawBuffer();
+void WriteToBuffer(int x, int y, const char* str);
+void DrawBuffer();
