@@ -10,7 +10,6 @@
 #define KEY_LEFT 75
 #define KEY_RIGHT 77
 
-
 //¸Ê Å©±â
 #define MAP_WIDTH 70
 #define MAP_HEIGHT 20
