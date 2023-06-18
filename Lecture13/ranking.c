@@ -7,7 +7,7 @@
 void recordScore(const char* fileName, Score score)
 {
     // 수정 모드("a")
-    FILE* file = fopen(fileName, "a");
+    FILE* file = fopen(fileName, "a+");
     if (file != NULL) 
     {      
         fprintf(file, "%s %d\n", score.name, score.score);        

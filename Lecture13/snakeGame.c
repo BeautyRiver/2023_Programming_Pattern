@@ -35,7 +35,7 @@ int startSnakeGame()
 	//Frame관련   
 	unsigned long time_start, time_end, DeltaTime;
 	time_end = GetTickCount();
-	int sleepDelay = 140;
+	int sleepDelay = 125;
 	int fruitScore = 50;
 	while (1)
 	{
@@ -43,11 +43,11 @@ int startSnakeGame()
 		Sleep(sleepDelay);
 		if (score >= 300)
 		{
-			sleepDelay = 120;
+			sleepDelay = 110;
 		}
 		if (score >= 600)
 		{
-			sleepDelay = 100;
+			sleepDelay = 95;
 			fruitScore = 100;
 		}
 		if (score >= 1700)
@@ -80,10 +80,10 @@ int startSnakeGame()
 
 		else if (GetAsyncKeyState(VK_ESCAPE))
 		{
-			isPauseOn = 1;			
+			isPauseOn = 1;
 			ClearBuffer();
 		}
-		
+
 		/* 뱀 위치 업데이트 */
 		for (int i = snake.length - 1; i > 0; --i)
 		{
@@ -125,14 +125,10 @@ int startSnakeGame()
 			if (snake.body[0].x == snake.body[i].x && snake.body[0].y == snake.body[i].y)
 			{
 				ClearBuffer();
-				float j = 0;
 				/* 자신의 몸에 닿으면 즉사*/
-				while (j <= 1900) //sleep대신 while문으로 딜레이
-				{
-					WriteToBuffer((MAP_WIDTH - strlen("뱀이 몸을 뚫어 즉사했습니다...")) / 2, MAP_HEIGHT / 2, "뱀이 몸을 뚫어 즉사했습니다...");
-					DrawBuffer();
-					j += 0.1;
-				}
+				WriteToBuffer((MAP_WIDTH - strlen("뱀이 몸을 뚫어 즉사했습니다...")) / 2, MAP_HEIGHT / 2, "뱀이 몸을 뚫어 즉사했습니다...");
+				DrawBuffer();
+				Sleep(1500);
 				life = 0;
 			}
 		}
@@ -187,25 +183,24 @@ int startSnakeGame()
 		ClearBuffer();
 		while (isDie)
 		{
-			float i = 0;
-
 			ClearBuffer();
-			while (i <= 1900) //sleep대신 while문으로 딜레이
-			{
-				WriteToBuffer((MAP_WIDTH - strlen(LIFE_MSG)) / 2, MAP_HEIGHT / 2, LIFE_MSG);
-				WriteToBuffer((MAP_WIDTH) / 2 + 2, MAP_HEIGHT / 2, lifeStr);
-				DrawBuffer();
-				i += 0.1;
-			}
-
+			WriteToBuffer((MAP_WIDTH - strlen(LIFE_MSG)) / 2, MAP_HEIGHT / 2, LIFE_MSG);
+			WriteToBuffer((MAP_WIDTH) / 2 + 2, MAP_HEIGHT / 2, lifeStr);
+			DrawBuffer();
+			Sleep(1500);
 			isDie = 0;
 			ClearBuffer();
 		}
 
 		//뱀 그리기
 		for (int i = 0; i < snake.length; ++i)
-		{
-			WriteToBuffer(snake.body[i].x, snake.body[i].y, "@");
+		{			
+			if (i == 0)
+			{
+				WriteToBuffer(snake.body[i].x, snake.body[i].y, "@");
+			}
+			else
+				WriteToBuffer(snake.body[i].x, snake.body[i].y, "o");
 		}
 
 		//사과 그리기
@@ -229,14 +224,11 @@ int startSnakeGame()
 		if (life == 0)
 		{
 			float i = 0;
-
 			ClearBuffer();
-			while (i <= 3000) //sleep대신 while문으로 딜레이
-			{
-				WriteToBuffer((MAP_WIDTH - strlen(GAMEOVER_MSG)) / 2, MAP_HEIGHT / 2, GAMEOVER_MSG);
-				DrawBuffer();
-				i += 0.1;
-			}
+
+			WriteToBuffer((MAP_WIDTH - strlen(GAMEOVER_MSG)) / 2, MAP_HEIGHT / 2, GAMEOVER_MSG);
+			DrawBuffer();
+			Sleep(1500);
 			ClearBuffer();
 			SetColor(0, 15); //흰색으로
 			DrawBuffer();
